@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     formValid() {
-      console.log(name.length);
+      
       const { name, email, message } = this;
       return (
         name.length > 0 &&
@@ -63,6 +63,10 @@ export default {
         message,
       });
       localStorage.setItem("messages", JSON.stringify(messages));
+      this.name = "";
+      this.email = "";
+      this.message = "";
+      console.log("your entry is in local storage")
     },
   },
 };

@@ -4,53 +4,34 @@ describe('submit form-window', () => {
   beforeEach(() => {
     cy.visit('http://127.0.0.1:5173/')
   })
-
+    const firstName = 'John'
+    const email = 'John@doe.com'
+    const message = 'This is not John, though'
   it('can add new info', () => {
-    const firstName = 'Feed the cat'
-    const email = 'Feed@thecat.com'
-    const message = 'Feed the cat'
-
-    cy.get('donation-window')
-    .shadow()
-    .find('#form').find('div').find('input[data-cy="firstName"]').type('Claudia')
-    // cy.get('donation-window')
-    // .shadow().find('#form').find('div').find('input[data-cy="email"]').type('aiud97@yahoo.com', { force: true })
-
-    .find('input[data-cy="email"]').type('aiud97@yahoo.com', { force: true })
-
-    // cy.get('input[data-cy="firstName"]').shadow()
-    // cy.get('[data-cy="email"]').type(`${email}{enter}`)
-    // cy.get('[data-cy="message"]').type(`${message}{enter}`)
-    // cy.get('[data-testid="name"]')
-    //   .should('have.length', 3)
-    //   .should('have.text', firstName)
-    // cy.get('[data-cy="email"]')
-    //   .should('have.length', 1)
-    //   .should('have.text', email)
-    // cy.get('[data-cy="message"]')
-    //   .should('have.length', 1)
-    //   .should('have.text', message)
-    // .find('#form')
-    // cy.get('donation-window')
-    // .shadow().find('#form').find('button').click()
-    //   cy.get('#form').submit()
-    // cy.get('[data-cy="submit"]').click()
-  })
-  it('can reset info', () => {
   
-    cy.get('[data-testid="name"]').type(`${firstName}{enter}`)
-    cy.get('[data-cy="email"]').type(`${email}{enter}`)
-    cy.get('[data-cy="message"]').type(`${message}{enter}`)
+
+    cy.get('input[data-cy="firstName"]')
+       .type(`${firstName}`)
+    cy.get('[data-cy="email"]')
+      .type(`${email}`, { force: true })
+    cy.get('[data-cy="message"]').type(`${message}`, { force: true })
+    
+    cy.get('[data-cy="submit"]').click()
+  })
+
+  it('can reset info', () => {
+
+    cy.get('[data-cy="firstName"]').type('aiud97@yahoo.com', { force: true })
+    cy.get('[data-cy="email"]').type(`${email}`, { force: true })
+    cy.get('[data-cy="message"]').type(`${message}`, { force: true })
 
     cy.get('[data-cy="reset"]').click()
-    cy.get('[data-testid="name"]')
-      .should('have.length', 0)
+
+    cy.get('[data-cy="firstName"]')
       .should('have.text', "")
     cy.get('[data-cy="email"]')
-      .should('have.length', 0)
       .should('have.text', "")
     cy.get('[data-cy="message"]')
-      .should('have.length', 0)
       .should('have.text', "")
   
   })

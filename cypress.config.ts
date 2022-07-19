@@ -6,4 +6,5 @@ export default defineConfig({
       // e2e testing node events setup code
     },
   },
+  includeShadowDom: true
 });
